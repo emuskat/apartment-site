@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>דירת 5 חדרים | אם המושבות, פתח תקווה — 130 מ"ר, קומה 9, נוף פתוח</title>
+<meta name="description" content="דירת 5 חדרים מושקעת באם המושבות, פתח תקווה. 130 מ"ר, קומה 9, בניין תדהר, 3 כיוונים, נוף פתוח שלא ייחסם. 2 חניות + מחסן בטאבו.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;300;400;500;600;700;900&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #8b7355;
+    --gold-light: #a08968;
+    --gold-glow: rgba(140, 115, 85, 0.12);
+    --dark: #f7f4f0;
+    --dark-card: #ffffff;
+    --dark-border: #e8e2da;
+    --text: #4a4340;
+    --text-dim: #8a8280;
+    --text-bright: #2c2420;
+    --radius: 16px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); }
+    50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.25); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 60px 24px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(140, 115, 85, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--dark-border), transparent);
+    opacity: 0.6;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(140, 115, 85, 0.35);
+    border-radius: 100px;
+    padding: 8px 24px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    animation: fadeIn 1s ease-out 0.3s both;
+  }
+
+  .hero-badge .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(140, 115, 85, 0.4);
+  }
+
+  .hero h1 {
+    font-size: clamp(36px, 7vw, 72px);
+    font-weight: 900;
+    color: var(--text-bright);
+    line-height: 1.15;
+    margin-bottom: 12px;
+    animation: fadeUp 1s ease-out 0.5s both;
+  }
+
+  .hero h1 .gold-text {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+
+  .hero-sub {
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 300;
+    color: var(--text-dim);
+    margin-bottom: 50px;
+    animation: fadeUp 1s ease-out 0.7s both;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 1s ease-out 0.9s both;
+  }
+
+  .hero-stat {
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-stat::after {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 40px;
+    background: var(--dark-border);
+  }
+
+  .hero-stat:last-child::after { display: none; }
+
+  .hero-stat .num {
+    display: block;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1.1;
+  }
+
+  .hero-stat .lbl {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: float 3s ease-in-out infinite, fadeIn 1s ease-out 1.5s both;
+  }
+
+  .scroll-hint svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-dim);
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  /* === SECTION LAYOUT === */
+  section {
+    padding: 100px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 48px;
+    line-height: 1.3;
+  }
+
+  .section-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-bottom: 20px;
+  }
+
+  /* === SPECS GRID === */
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .spec-card {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .spec-card:hover {
+    border-color: rgba(140, 115, 85, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+  }
+
+  .spec-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(140, 115, 85, 0.08);
+    border: 1px solid rgba(140, 115, 85, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .spec-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-weight: 400;
+    margin-bottom: 2px;
+  }
+
+  .spec-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+
+  /* === FEATURES === */
+  .features-section {
+    background: linear-gradient(180deg, var(--dark) 0%, #f0ebe5 100%);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: var(--dark-card);
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .feature-item:hover {
+    border-color: var(--dark-border);
+  }
+
+  .feature-check {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(140, 115, 85, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--gold-light);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .feature-text {
+    font-size: 15px;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  /* === BUILDING === */
+  .building-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .building-card {
+    text-align: center;
+    padding: 40px 24px;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--dark-card), #f5f1ec);
+    border: 1px solid var(--dark-border);
+    transition: border-color 0.4s ease, transform 0.4s ease;
+  }
+
+  .building-card:hover {
+    border-color: rgba(140, 115, 85, 0.3);
+    transform: translateY(-4px);
+  }
+
+  .building-card .b-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+
+  .building-card .b-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+  }
+
+  .building-card .b-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* === LOCATION === */
+  .location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .location-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    transition: background 0.3s ease;
+  }
+
+  .location-item:hover {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .loc-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(140, 115, 85, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .loc-text {
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  /* === VIEW SECTION === */
+  .view-section {
+    text-align: center;
+    padding: 80px 40px;
+    background: linear-gradient(135deg, #f0ebe5, #ede7df);
+    border: 1px solid var(--dark-border);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto 80px;
+    max-width: 900px;
+  }
+
+  .view-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(140, 115, 85, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .view-section h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .view-section p {
+    font-size: 17px;
+    line-height: 1.9;
+    color: var(--text-dim);
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .view-section .highlight-line {
+    color: var(--gold-light);
+    font-weight: 500;
+    font-size: 19px;
+    display: block;
+    margin-top: 20px;
+  }
+
+  /* === HIGHLIGHTS === */
+  .highlights-box {
+    border: 1px solid rgba(140, 115, 85, 0.2);
+    border-radius: 24px;
+    padding: 48px;
+    background: linear-gradient(135deg, rgba(140, 115, 85, 0.05), transparent);
+    max-width: 900px;
+    margin: 0 auto 60px;
+  }
+
+  .highlights-box h3 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 28px;
+  }
+
+  .highlights-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .highlights-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    padding: 10px 0;
+    color: var(--text);
+  }
+
+  .hl-diamond {
+    color: var(--gold-light);
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+
+  /* === PRICE === */
+  .price-section {
+    text-align: center;
+    padding: 80px 40px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .price-tag {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    direction: ltr;
+    unicode-bidi: bidi-override;
+  }
+
+  .price-note {
+    font-size: 15px;
+    color: var(--text-dim);
+    font-weight: 300;
+  }
+
+  /* === CTA === */
+  .cta-section {
+    text-align: center;
+    padding: 80px 40px;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(140,115,85,0.3), transparent 50%, rgba(140,115,85,0.1));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .cta-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 10px;
+  }
+
+  .cta-sub {
+    font-size: 17px;
+    color: var(--text-dim);
+    font-weight: 300;
+    margin-bottom: 36px;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 40px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--dark);
+    font-family: 'Heebo', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .cta-btn:hover {
+    transform: scale(1.04);
+    box-shadow: 0 8px 30px rgba(140, 115, 85, 0.3);
+  }
+
+  .cta-phone {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--text-dim);
+    direction: ltr;
+  }
+
+  /* === FOOTER === */
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--dark-border);
+    font-size: 12px;
+    color: #555;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .hero-stats { gap: 28px; }
+    .hero-stat::after { display: none; }
+    .hero-stat .num { font-size: 32px; }
+    .specs-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+    .building-grid { grid-template-columns: 1fr; gap: 12px; }
+    .location-grid { grid-template-columns: 1fr; }
+    .highlights-list { grid-template-columns: 1fr; }
+    .highlights-box { padding: 32px 24px; }
+    .view-section { padding: 48px 24px; margin: 0 24px 60px; }
+    .cta-section { margin: 0 24px 40px; padding: 48px 24px; }
+    section { padding: 60px 24px; }
+  }
+
+  /* === PRINT === */
+  @media print {
+    .hero { min-height: auto; padding: 40px 24px; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    למכירה
+  </div>
+  <h1>דירת 5 חדרים<br><span class="gold-text">באם המושבות</span></h1>
+  <div class="hero-sub">פתח תקווה &middot; קומה 9 &middot; נוף פתוח שלא ייחסם</div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="num">130</span>
+      <span class="lbl">מ"ר</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num">5</span>
+      <span class="lbl">חדרים</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num">9</span>
+      <span class="lbl">קומה</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num">2</span>
+      <span class="lbl">חניות</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num">3</span>
+      <span class="lbl">כיוונים</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</header>
+
+<!-- SPECS -->
+<section>
+  <div class="reveal">
+    <div class="section-label">פרטי הדירה</div>
+    <div class="section-divider"></div>
+    <div class="section-title">כל מה שצריך —<br>כבר כאן</div>
+  </div>
+
+  <div class="specs-grid">
+    <div class="spec-card reveal reveal-delay-1">
+      <div class="spec-icon">📐</div>
+      <div>
+        <div class="spec-label">שטח</div>
+        <div class="spec-value">130 מ"ר כולל מרפסת</div>
+      </div>
+    </div>
+    <div class="spec-card reveal reveal-delay-1">
+      <div class="spec-icon">🏠</div>
+      <div>
+        <div class="spec-label">חדרים</div>
+        <div class="spec-value">5 חדרים כולל ממ"ד</div>
+      </div>
+    </div>
+    <div class="spec-card reveal reveal-delay-2">
+      <div class="spec-icon">🔼</div>
+      <div>
+        <div class="spec-label">קומה</div>
+        <div class="spec-value">9 מתוך 12</div>
+      </div>
+    </div>
+    <div class="spec-card reveal reveal-delay-2">
+      <div class="spec-icon">☀️</div>
+      <div>
+        <div class="spec-label">כיוונים</div>
+        <div class="spec-value">דרום &middot; מערב &middot; צפון</div>
+      </div>
+    </div>
+    <div class="spec-card reveal reveal-delay-3">
+      <div class="spec-icon">🚗</div>
+      <div>
+        <div class="spec-label">חניה</div>
+        <div class="spec-value">2 חניות עוקבות בטאבו — תת-קרקעי</div>
+      </div>
+    </div>
+    <div class="spec-card reveal reveal-delay-3">
+      <div class="spec-icon">📦</div>
+      <div>
+        <div class="spec-label">מחסן</div>
+        <div class="spec-value">2×3 מ' בגובה 3 מ' (6 מ"ר)</div>
+      </div>
+    </div>
+    <div class="spec-card reveal reveal-delay-4">
+      <div class="spec-icon">🚿</div>
+      <div>
+        <div class="spec-label">חדרי רחצה</div>
+        <div class="spec-value">שירותי אורחים + 2 מקלחות + אמבטיה</div>
+      </div>
+    </div>
+    <div class="spec-card reveal reveal-delay-4">
+      <div class="spec-icon">🌅</div>
+      <div>
+        <div class="spec-label">מרפסת</div>
+        <div class="spec-value">מרפסת שמש מערבית — נקודת מים + גז</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="reveal">
+    <div class="section-label">מפרט</div>
+    <div class="section-divider"></div>
+    <div class="section-title">השקעה שמורגשת<br>בכל פינה</div>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-item reveal">
+      <span class="feature-check">✦</span>
+      <span class="feature-text">ארונות מטבח מעץ מלא — לא פורמייקה, לא מלמין</span>
+    </div>
+    <div class="feature-item reveal">
+      <span class="feature-check">✦</span>
+      <span class="feature-text">מיזוג אוויר מרכזי בכל הדירה</span>
+    </div>
+    <div class="feature-item reveal">
+      <span class="feature-check">✦</span>
+      <span class="feature-text">תאורה מונמכת (שקועה) — עיצוב ואווירה</span>
+    </div>
+    <div class="feature-item reveal">
+      <span class="feature-check">✦</span>
+      <span class="feature-text">ריצוף 50×50 אחיד ואיכותי</span>
+    </div>
+    <div class="feature-item reveal">
+      <span class="feature-check">✦</span>
+      <span class="feature-text">אמבטיה משופצת לאחרונה</span>
+    </div>
+    <div class="feature-item reveal">
+      <span class="feature-check">✦</span>
+      <span class="feature-text">ארון שירות מובנה ליד מכונת הכביסה</span>
+    </div>
+    <div class="feature-item reveal">
+      <span class="feature-check">✦</span>
+      <span class="feature-text">ממ"ד — מרחב מוגן דירתי</span>
+    </div>
+    <div class="feature-item reveal">
+      <span class="feature-check">✦</span>
+      <span class="feature-text">מרפסת עם נקודת מים ונקודת גז</span>
+    </div>
+  </div>
+</section>
+
+<!-- BUILDING -->
+<section>
+  <div class="reveal">
+    <div class="section-label">הבניין</div>
+    <div class="section-divider"></div>
+    <div class="section-title">תדהר — בנייה שעומדת<br>במבחן הזמן</div>
+  </div>
+
+  <div class="building-grid">
+    <div class="building-card reveal reveal-delay-1">
+      <div class="b-icon">🏗️</div>
+      <div class="b-title">בניין תדהר</div>
+      <div class="b-desc">חברת בנייה מובילה<br>משנת 2005</div>
+    </div>
+    <div class="building-card reveal reveal-delay-2">
+      <div class="b-icon">🛗</div>
+      <div class="b-title">2 מעליות</div>
+      <div class="b-desc">4 דירות בקומה בלבד<br>שקט ופרטיות</div>
+    </div>
+    <div class="building-card reveal reveal-delay-3">
+      <div class="b-icon">✨</div>
+      <div class="b-title">מטופח ומתוחזק</div>
+      <div class="b-desc">ועד בית פעיל ומסודר<br>380 ₪ לחודש</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section>
+  <div class="reveal">
+    <div class="section-label">מיקום</div>
+    <div class="section-divider"></div>
+    <div class="section-title">אם המושבות —<br>הכל בהישג יד</div>
+  </div>
+
+  <div class="location-grid">
+    <div class="location-item reveal">
+      <div class="loc-icon">🚗</div>
+      <span class="loc-text">צד מערבי של השכונה — יציאה מהירה</span>
+    </div>
+    <div class="location-item reveal">
+      <div class="loc-icon">🚆</div>
+      <span class="loc-text">רכבת ישראל — במרחק הליכה קצרה</span>
+    </div>
+    <div class="location-item reveal">
+      <div class="loc-icon">🚇</div>
+      <span class="loc-text">רכבת קלה — נגישות לכל המטרופולין</span>
+    </div>
+    <div class="location-item reveal">
+      <div class="loc-icon">🎒</div>
+      <span class="loc-text">בתי ספר וגנים בקרבה מיידית</span>
+    </div>
+    <div class="location-item reveal">
+      <div class="loc-icon">🛒</div>
+      <span class="loc-text">מרכזי קניות בהישג יד</span>
+    </div>
+    <div class="location-item reveal">
+      <div class="loc-icon">🤫</div>
+      <span class="loc-text">צד פנימי ושקט — לא על כביש ראשי</span>
+    </div>
+    <div class="location-item reveal">
+      <div class="loc-icon">🌳</div>
+      <span class="loc-text">גינה ציבורית מטופחת עם גן משחקים</span>
+    </div>
+    <div class="location-item reveal">
+      <div class="loc-icon">🏡</div>
+      <span class="loc-text">שכונה מבוקשת עם אוכלוסייה איכותית</span>
+    </div>
+  </div>
+</section>
+
+<!-- VIEW -->
+<div class="reveal">
+  <div class="view-section">
+    <h3>הנוף</h3>
+    <p>
+      מהמרפסת ומחלונות הדירה נשקף נוף פתוח לגינה הציבורית
+      הירוקה של מתחם הבניינים.
+      <br>
+      קומה 9 נותנת גובה ומרחב בלי להרגיש מנותקים מהחיים למטה.
+      <span class="highlight-line">
+        אין תכנון בנייה שיחסום את הנוף —<br>מה שרואים היום, רואים גם מחר.
+      </span>
+    </p>
+  </div>
+</div>
+
+<!-- HIGHLIGHTS -->
+<div class="reveal">
+  <div class="highlights-box">
+    <h3>למה דווקא הדירה הזו?</h3>
+    <ul class="highlights-list">
+      <li><span class="hl-diamond">◆</span> מוכנה לכניסה — בלי שיפוצים, בלי הפתעות</li>
+      <li><span class="hl-diamond">◆</span> מפרט אמיתי — עץ מלא, מיזוג מרכזי</li>
+      <li><span class="hl-diamond">◆</span> 3 כיוונות אוויר — אור לאורך כל היום</li>
+      <li><span class="hl-diamond">◆</span> 2 חניות + מחסן 6 מ"ר — הכל בטאבו</li>
+      <li><span class="hl-diamond">◆</span> בניין תדהר — בנייה שעומדת במבחן הזמן</li>
+      <li><span class="hl-diamond">◆</span> נגישות מלאה — רכבת, קלה, בתי ספר</li>
+      <li><span class="hl-diamond">◆</span> שקט ופרטיות — 4 דירות בקומה בלבד</li>
+      <li><span class="hl-diamond">◆</span> נוף פתוח ומוגן — ירוק, שקט, קבוע</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PRICE -->
+<div class="price-section reveal">
+  <div class="section-label">מחיר</div>
+  <div class="section-divider" style="margin: 0 auto 20px;"></div>
+  <div class="price-tag">3,850,000 ₪</div>
+  <div class="price-note">מחיר מבוקש</div>
+</div>
+
+<!-- CTA -->
+<div class="reveal">
+  <div class="cta-section">
+    <div class="cta-title">דירה כזו לא מגיעה לשוק כל יום</div>
+    <div class="cta-sub">מוזמנים לתאם ביקור ולראות במו עיניכם</div>
+    <a href="tel:0545422520" class="cta-btn">
+      לתיאום ביקור
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    </a>
+    <div class="cta-phone">054-542-2520</div>
+  </div>
+</div>
+
+<footer>
+  * המידע בעמוד זה אינו מהווה הצעה מחייבת. הפרטים נכונים למועד הפרסום.
+</footer>
+
+<!-- Scroll Reveal Script -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
